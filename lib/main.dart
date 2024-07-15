@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'screens/auth/auth.dart';
 import 'utils/theme.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class GapjykPaymentApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
+      home: const Auth(),
     );
   }
 }
