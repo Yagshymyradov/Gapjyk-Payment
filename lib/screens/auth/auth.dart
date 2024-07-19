@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../components/field_text.dart';
 import '../../utils/assets.dart';
+import '../../utils/navigation.dart';
 import '../../utils/theme.dart';
 import '../../utils/validators.dart';
+import '../home.dart';
 
 class Auth extends StatefulWidget {
   const Auth({super.key});
@@ -59,7 +61,10 @@ class _AuthState extends State<Auth> {
               ),
               const SizedBox(height: 64),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () => replaceRootScreen(
+                  context,
+                  const Home(),
+                ),
                 child: Text(
                   'Içeri gir',
                   style: textTheme.titleSmall,
