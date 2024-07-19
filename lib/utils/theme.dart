@@ -62,10 +62,10 @@ class AppTheme {
     ),
     elevatedButtonTheme: const ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(
+        backgroundColor: WidgetStatePropertyAll(
           Color.fromRGBO(158, 232, 111, 1),
         ),
-        minimumSize: MaterialStatePropertyAll(Size(double.infinity, 48)),
+        minimumSize: WidgetStatePropertyAll(Size(double.infinity, 48)),
       ),
     ),
     textTheme: const TextTheme(
@@ -96,7 +96,7 @@ class AppTheme {
         color: Color.fromRGBO(14, 15, 12, 1),
       ),
       titleSmall: TextStyle(
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         fontSize: 16,
         color: Color.fromRGBO(23, 51, 0, 1),
       ),
