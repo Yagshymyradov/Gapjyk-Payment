@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'screens/auth/auth.dart';
+import 'utils/navigation.dart';
 import 'utils/theme.dart';
 
 void main() {
-  runApp(const GapjykPaymentApp());
+  runApp(
+    const ProviderScope(child: GapjykPaymentApp()),
+  );
 }
 
 class GapjykPaymentApp extends StatelessWidget {
@@ -15,6 +19,8 @@ class GapjykPaymentApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
+      navigatorKey: rootNavigatorKey,
+      scaffoldMessengerKey: scaffoldMessengerKey,
       home: const Auth(),
     );
   }

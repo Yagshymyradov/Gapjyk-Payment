@@ -98,7 +98,7 @@ void showSnackBar(
           borderRadius: BorderRadius.circular(10),
         ),
         margin: margin,
-        backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor ?? Colors.red,
         behavior: SnackBarBehavior.floating,
         content: Row(
           children: [

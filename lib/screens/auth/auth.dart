@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/field_text.dart';
+import '../../providers.dart';
 import '../../utils/assets.dart';
 import '../../utils/navigation.dart';
 import '../../utils/theme.dart';
@@ -16,9 +18,38 @@ class Auth extends StatefulWidget {
 
 class _AuthState extends State<Auth> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   final nameController = TextEditingController();
   final passwordController = TextEditingController();
+  bool inProgress = false;
+
+  void updateUi() {
+    setState(() {
+      //no-op
+    });
+  }
+
+  Future<void> authButton() async {
+    inProgress = true;
+    updateUi();
+    final scope = ProviderScope.containerOf(context, listen: false);
+    final apiClient = scope.read(apiClientProvider);
+
+    try {
+      await apiClient.login(
+        nameController.text,
+        passwordController.text,
+      );
+      if (mounted) {
+        await replaceRootScreen(context, const Home());
+      }
+    } catch (e) {
+      if (mounted) {
+        showSnackBar(e.toString());
+      }
+    }
+    inProgress = false;
+    updateUi();
+  }
 
   @override
   void dispose() {
@@ -61,14 +92,13 @@ class _AuthState extends State<Auth> {
               ),
               const SizedBox(height: 64),
               ElevatedButton(
-                onPressed: () => replaceRootScreen(
-                  context,
-                  const Home(),
-                ),
-                child: Text(
-                  'Içeri gir',
-                  style: textTheme.titleSmall,
-                ),
+                onPressed: () => inProgress == true ? null : authButton(),
+                child: inProgress == true
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        'Içeri gir',
+                        style: textTheme.titleSmall,
+                      ),
               ),
             ],
           ),
