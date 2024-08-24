@@ -41,7 +41,7 @@ class GapjykPaymentApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       navigatorKey: rootNavigatorKey,
       scaffoldMessengerKey: scaffoldMessengerKey,
-      home: const Auth(),
+      home: const SplashScreen(),
     );
   }
 }
