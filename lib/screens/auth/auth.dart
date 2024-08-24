@@ -35,11 +35,12 @@ class _AuthState extends State<Auth> {
     final apiClient = scope.read(apiClientProvider);
 
     try {
-      await apiClient.login(
+      final result = await apiClient.login(
         nameController.text,
         passwordController.text,
       );
       if (mounted) {
+        await scope.read(authControllerProvider.notifier).onSignedIn(result);
         await replaceRootScreen(context, const Home());
       }
     } catch (e) {
