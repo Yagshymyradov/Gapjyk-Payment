@@ -3,6 +3,8 @@ import 'response.dart';
 
 extension Endpoints on Never {
   static String get login => 'code-sellers/login';
+
+  static String get profile => 'code-sellers/profile';
 }
 
 class ApiClient {
@@ -22,6 +24,15 @@ class ApiClient {
       Endpoints.login,
       body: postData,
       mapper: (dynamic data) => AuthResponse.fromJson(
+        data['data'] as Map<String, dynamic>,
+      ),
+    );
+  }
+
+  Future<SellerProfile> profile() async {
+    return _httpClient.get(
+      Endpoints.profile,
+      mapper: (dynamic data) => SellerProfile.fromJson(
         data['data'] as Map<String, dynamic>,
       ),
     );
