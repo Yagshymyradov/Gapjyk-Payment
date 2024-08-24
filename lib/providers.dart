@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/api_client.dart';
@@ -24,6 +27,25 @@ final apiBaseUrlProvider = Provider((ref) => 'http://216.250.8.149/api/v1/');
 final httpClientProvider = Provider(
   (ref) {
     final httpClient = JsonHttpClient();
+
+    httpClient.dio.interceptors.addAll(
+      [
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            final authToken = ref.read(authControllerProvider);
+            try {
+              if (authToken != null) {
+                options.headers[HttpHeaders.authorizationHeader] =
+                    'Bearer ${authToken.accessToken}';
+              }
+            } catch (e) {
+              //ignored
+            }
+            handler.next(options);
+          },
+        ),
+      ],
+    );
 
     ref.listen(
       apiBaseUrlProvider,
