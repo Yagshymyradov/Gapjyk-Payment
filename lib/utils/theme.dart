@@ -101,7 +101,7 @@ class AppTheme {
         color: Color.fromRGBO(23, 51, 0, 1),
       ),
       bodyMedium: TextStyle(
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: FontWeight.w500,
         color: Color.fromRGBO(18, 18, 18, 1),
       ),
@@ -121,7 +121,7 @@ class AppTheme {
         color: Color.fromRGBO(22, 51, 0, 1),
       ),
       labelMedium: TextStyle(
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: FontWeight.w400,
         color: Color.fromRGBO(0, 0, 0, 0.5),
       ),

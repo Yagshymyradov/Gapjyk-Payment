@@ -5,6 +5,7 @@ import '../utils/assets.dart';
 import '../utils/navigation.dart';
 import '../utils/theme.dart';
 import 'choose_payment.dart';
+import 'profile/profile.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -16,6 +17,15 @@ class Home extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: AppIcons.gapjykLogo.svgPicture(),
+        actions: [
+          IconButton(
+            onPressed: () => navigateToScreen(
+              context,
+              const Profile(),
+            ),
+            icon: const Icon(Icons.info_outline),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
