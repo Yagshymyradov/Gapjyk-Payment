@@ -13,4 +13,15 @@ enum SubscriptionMonth {
         return '6 ay/60 tmt';
     }
   }
+
+  int get asSentValue {
+    switch (this) {
+      case SubscriptionMonth.one:
+        return 1;
+      case SubscriptionMonth.three:
+        return 3;
+      case SubscriptionMonth.six:
+        return 6;
+    }
+  }
 }
