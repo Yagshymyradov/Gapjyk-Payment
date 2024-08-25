@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../components/field_text.dart';
 import '../utils/assets.dart';
 import '../utils/navigation.dart';
 import '../utils/theme.dart';
+import '../utils/validators.dart';
 import 'choose_payment.dart';
 import 'profile/profile.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final formKey = GlobalKey<FormState>();
+  final phoneController = TextEditingController();
+
+  void onNextTap() {
+    if (!formKey.currentState!.validate()) return;
+
+    navigateToScreen(
+      context,
+      ChoosePayment(phone: phoneController.text),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +48,31 @@ class Home extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const FieldText(
-              hintText: 'Tölenmeli belgi',
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () => navigateToScreen(
-                context,
-                const ChoosePayment(),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FieldText(
+                hintText: 'Tölenmeli belgi',
+                controller: phoneController,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(8),
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                validator: (phone) => Validator.phoneValidate(context, phone),
               ),
-              child: Text(
-                'Next',
-                style: textTheme.titleSmall,
+              const SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: onNextTap,
+                child: Text(
+                  'Next',
+                  style: textTheme.titleSmall,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

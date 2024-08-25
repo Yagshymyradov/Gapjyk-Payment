@@ -55,6 +55,10 @@ class AppTheme {
         borderRadius: BorderRadius.circular(10),
         borderSide: const BorderSide(color: Color.fromRGBO(168, 32, 13, 1)),
       ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Color.fromRGBO(168, 32, 13, 1)),
+      ),
     ),
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),

@@ -19,9 +19,8 @@ class Validator {
     if (phone == null || phone.isEmpty) return 'Telefon beligiňizi giriziň';
 
     final trimmedValue = phone.trim();
-    if (phone.length >= 2 || trimmedValue.length < 8) {
-      //TODO DON'T FORGOT TO FIX IT
-      const allowedPhonePrefixes = ['60', '61', '62', '63', '64', '65', '70', '71', '67', '72'];
+    if (trimmedValue.length >= 8) {
+      const allowedPhonePrefixes = ['60', '61', '62', '63', '64', '65', '70', '71'];
       if (allowedPhonePrefixes.contains(phone.substring(0, 2))) {
         return null;
       }
@@ -29,4 +28,3 @@ class Validator {
     return 'Nädogry belgi';
   }
 }
-
