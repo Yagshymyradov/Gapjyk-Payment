@@ -78,7 +78,7 @@ class Profile extends ConsumerWidget {
                     style: textTheme.labelMedium,
                   ),
                   Text(
-                    '${data.totalSold} %',
+                    '${data.percent} %',
                     style: textTheme.bodyMedium,
                   ),
                 ],

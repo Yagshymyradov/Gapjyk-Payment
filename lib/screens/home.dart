@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: onNextTap,
                 child: Text(
-                  'Next',
+                  'Dowam et',
                   style: textTheme.titleSmall,
                 ),
               ),

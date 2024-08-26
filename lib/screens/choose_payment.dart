@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import '../providers.dart';
 import '../utils/enums.dart';
 import '../utils/navigation.dart';
 import '../utils/theme.dart';
+import 'home.dart';
 import 'profile/profile.dart';
 
 class ChoosePayment extends StatefulWidget {
@@ -54,7 +56,7 @@ class _ChoosePaymentState extends State<ChoosePayment> {
       );
       if (mounted) {
         scope.refresh(profileProvider);
-        Navigator.pop(context);
+        unawaited(replaceRootScreen(context, const Home()));
       }
     } catch (e) {
       if (e is HttpStatusException && e.code == 404) {

@@ -29,7 +29,7 @@ class SellerProfile {
   final int sold;
   @JsonKey(name: 'total_sold')
   final int totalSold;
-  final double percent;
+  final int percent;
   @JsonKey(name: 'seller_profit')
   final int sellerProfit;
   @JsonKey(name: 'admin_profit')

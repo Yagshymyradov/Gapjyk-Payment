@@ -29,7 +29,7 @@ SellerProfile _$SellerProfileFromJson(Map<String, dynamic> json) =>
       limit: (json['limit'] as num).toInt(),
       sold: (json['sold'] as num).toInt(),
       totalSold: (json['total_sold'] as num).toInt(),
-      percent: (json['percent'] as num).toDouble(),
+      percent: (json['percent'] as num).toInt(),
       sellerProfit: (json['seller_profit'] as num).toInt(),
       adminProfit: (json['admin_profit'] as num).toInt(),
     );
