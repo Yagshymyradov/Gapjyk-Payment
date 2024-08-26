@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -65,7 +64,6 @@ class _ChoosePaymentState extends State<ChoosePayment> {
       } else {
         showSnackBar('Ýalnyşlyk ýüze çykdy, täzden synanyşyň!');
       }
-      log(e.toString());
     }
 
     inProgress = false;

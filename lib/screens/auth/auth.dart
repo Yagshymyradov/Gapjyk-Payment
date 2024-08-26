@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/field_text.dart';
+import '../../data/exceptions.dart';
 import '../../providers.dart';
 import '../../utils/assets.dart';
 import '../../utils/navigation.dart';
@@ -44,8 +47,12 @@ class _AuthState extends State<Auth> {
         await replaceRootScreen(context, const Home());
       }
     } catch (e) {
-      if (mounted) {
-        showSnackBar(e.toString());
+      if (e is HttpStatusException && e.code == 404) {
+        final dataAsString = e.responseBody as String;
+        final error = jsonDecode(dataAsString) as Map<String, dynamic>;
+        showSnackBar(error['error'].toString());
+      } else {
+        showSnackBar('Ýalnyşlyk ýüze çykdy, täzden synanyşyň!');
       }
     }
     inProgress = false;
