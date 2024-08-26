@@ -30,8 +30,8 @@ SellerProfile _$SellerProfileFromJson(Map<String, dynamic> json) =>
       sold: (json['sold'] as num).toInt(),
       totalSold: (json['total_sold'] as num).toInt(),
       percent: (json['percent'] as num).toInt(),
-      sellerProfit: (json['seller_profit'] as num).toInt(),
-      adminProfit: (json['admin_profit'] as num).toInt(),
+      sellerProfit: (json['seller_profit'] as num).toDouble(),
+      adminProfit: (json['admin_profit'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$SellerProfileToJson(SellerProfile instance) =>

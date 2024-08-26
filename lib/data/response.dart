@@ -31,9 +31,9 @@ class SellerProfile {
   final int totalSold;
   final int percent;
   @JsonKey(name: 'seller_profit')
-  final int sellerProfit;
+  final double sellerProfit;
   @JsonKey(name: 'admin_profit')
-  final int adminProfit;
+  final double adminProfit;
 
   SellerProfile({
     required this.id,

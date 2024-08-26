@@ -22,11 +22,11 @@ class Profile extends ConsumerWidget {
       appBar: AppBar(
         title: Text(user?.username ?? ''),
       ),
-      body: profile.when(
-        data: (data) => Padding(
+      body: RefreshIndicator(
+        onRefresh: () async => ref.invalidate(profileProvider),
+        child: profile.when(
+          data: (data) => ListView(
           padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +92,7 @@ class Profile extends ConsumerWidget {
                     style: textTheme.labelMedium,
                   ),
                   Text(
-                    '${data.sellerProfit} TMT',
+                    '${data.sellerProfit.toStringAsFixed(1)} TMT',
                     style: textTheme.bodyMedium,
                   ),
                 ],
@@ -106,19 +106,19 @@ class Profile extends ConsumerWidget {
                     style: textTheme.labelMedium,
                   ),
                   Text(
-                    '${data.adminProfit} TMT',
+                    '${data.adminProfit.toStringAsFixed(1)} TMT',
                     style: textTheme.bodyMedium,
                   ),
                 ],
               ),
             ],
           ),
-        ),
-        error: (error, stack) => NoConnectionIndicator(
-          onRetryTap: () async => ref.invalidate(profileProvider),
-        ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
+          error: (error, stack) => NoConnectionIndicator(
+            onRetryTap: () async => ref.invalidate(profileProvider),
+          ),
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
         ),
       ),
     );
