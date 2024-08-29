@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/api_client.dart';
 import 'data/auth_controller.dart';
 import 'data/json_http_client.dart';
 import 'data/services/preferences.dart';
+import 'screens/splash_screen.dart';
+import 'utils/navigation.dart';
 
 /// It is an error to use this provider without overriding it's value.
 final appPrefsServiceProvider = Provider<AppPrefsService>(
@@ -43,6 +46,17 @@ final httpClientProvider = Provider(
             }
             handler.next(options);
           },
+          onError: (error, handler) {
+            final authToken = ref.read(authControllerProvider)?.accessToken;
+
+            if (error.response?.statusCode == 401) {
+              if (authToken == null) return;
+              //NOTE: one account one device
+              final context = rootNavigatorKey.currentContext;
+              logout(context!);
+            }
+            return handler.next(error);
+          },
         ),
       ],
     );
@@ -68,3 +82,17 @@ final apiClientProvider = Provider(
   (ref) => ApiClient(ref.watch(httpClientProvider)),
   dependencies: [httpClientProvider],
 );
+
+Future<void> logout(BuildContext context) async {
+  final scope = ProviderScope.containerOf(context, listen: false);
+  final prefs = scope.read(appPrefsServiceProvider);
+  final authController = scope.read(authControllerProvider.notifier);
+
+  await authController.signOut();
+  await prefs.clear();
+
+  if (context.mounted) {
+    // ignore: unawaited_futures
+    replaceRootScreen(context, const SplashScreen());
+  }
+}
