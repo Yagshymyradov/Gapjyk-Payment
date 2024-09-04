@@ -25,7 +25,7 @@ final authControllerProvider = StateNotifierProvider<AuthController, UserState?>
   dependencies: [appPrefsServiceProvider],
 );
 
-final apiBaseUrlProvider = Provider((ref) => 'http://216.250.8.149/api/v1/');
+final apiBaseUrlProvider = Provider((ref) => 'https://ybady.com.tm/api/v1/');
 
 final httpClientProvider = Provider(
   (ref) {
